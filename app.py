@@ -27,9 +27,9 @@ def home():
             # Pass the URL to your backend function
             zips = process_url(user_url, count)
             return send_file(zips, mimetype='application/zip', as_attachment=True, download_name='bingo_boards.zip')
-        return render_template('index.html', message="URL received!")
+        return render_template('index.html', message="Your Bingo Boards have been generated!")
     # For a GET request, simply render the homepage with the form
-    return render_template('index.html', message="Paste a URL below:")
+    return render_template('index.html', message="Enter a Spotify Playlist URL:")
 
 if __name__ == '__main__':
     app.run(debug=True)
