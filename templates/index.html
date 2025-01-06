@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Submission with Slider</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+    <h1>Submit a URL and Choose a Number</h1>
+    <p>{{ message }}</p>
+    <form method="POST" action="/">
+        <!-- URL Input -->
+        <label for="user_url">Enter your URL:</label><br>
+        <input type="text" id="user_url" name="user_url" required /><br><br>
+
+        <!-- Sliding Scale (Range Input) -->
+        <label for="user_number">Choose a number:</label><br>
+        <input
+            type="range"
+            id="user_number"
+            name="user_number"
+            min="1"
+            max="50"
+            value="25"
+            oninput="this.nextElementSibling.value = this.value"
+        />
+        <!-- Display the selected slider value in real-time -->
+        <output>50</output>
+        <br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
