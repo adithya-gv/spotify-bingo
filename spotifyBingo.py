@@ -6,9 +6,12 @@ import textwrap
 import requests
 import io
 import zipfile
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-secret = "46c1638fabf54664a740db73b36b9f61"
+secret = os.getenv("SECRET_ID")
 
 def get_bearer_token():
     url = "https://accounts.spotify.com/api/token"
@@ -18,8 +21,8 @@ def get_bearer_token():
 
     data = {
         "grant_type": "client_credentials",
-        "client_id": "46c1638fabf54664a740db73b36b9f61",
-        "client_secret": "9657f3af4929444dab7cc5749a8f614d"
+        "client_id": os.getenv("SECRET_ID"),
+        "client_secret": os.getenv("SECRET_SECRET"),
     }
 
     response = requests.post(url, headers=headers, data=data)
