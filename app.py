@@ -26,7 +26,7 @@ def home():
         if user_url:
             # Pass the URL to your backend function
             zips = process_url(user_url, count)
-            return send_file(zips, mimetype='application/zip', as_attachment=True, attachment_filename='bingo_boards.zip')
+            return send_file(zips, mimetype='application/zip', as_attachment=True, download_name='bingo_boards.zip')
         return render_template('index.html', message="URL received!")
     # For a GET request, simply render the homepage with the form
     return render_template('index.html', message="Paste a URL below:")
