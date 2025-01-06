@@ -29,7 +29,7 @@ def home():
             return send_file(zips, mimetype='application/zip', as_attachment=True, download_name='bingo_boards.zip')
         return render_template('index.html', message="Your Bingo Boards have been generated!")
     # For a GET request, simply render the homepage with the form
-    return render_template('index.html', message="Enter a Spotify Playlist URL:")
+    return render_template('index.html', message="Convert your Spotify playlist into Bingo Boards!")
 
 if __name__ == '__main__':
     app.run(debug=True)
