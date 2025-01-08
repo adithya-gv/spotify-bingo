@@ -3,7 +3,7 @@ from spotifyBingo import create_bingo_boards
 
 app = Flask(__name__)
 
-def process_url(url, count):
+def process_url(url, count, title):
     """
     A placeholder function that processes the URL.
     Replace this with your own implementation.
@@ -12,7 +12,7 @@ def process_url(url, count):
     # In your real application, you might parse the URL,
     # fetch data, etc.
     count = int(count)
-    zips = create_bingo_boards(count, url)
+    zips = create_bingo_boards(count, url, title)
     
     return zips
 
@@ -22,10 +22,13 @@ def home():
         # Get the URL from the form input named 'user_url'
         user_url = request.form.get('user_url')
         count = request.form.get('user_number')  # Note: Comes in as a string
+        title = request.form.get('title')  # Note: Comes in as a string
+        if title == "":
+            title = "Spotify Bingo"
 
         if user_url:
             # Pass the URL to your backend function
-            zips = process_url(user_url, count)
+            zips = process_url(user_url, count, title)
             return send_file(zips, mimetype='application/zip', as_attachment=True, download_name='bingo_boards.zip')
         return render_template('index.html', message="Your Bingo Boards have been generated!")
     # For a GET request, simply render the homepage with the form

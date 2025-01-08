@@ -3,6 +3,7 @@
 <head>
     <title>Spotify Bingo Generator</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>Welcome to the Spotify Bingo Generator!</h1>
@@ -25,7 +26,12 @@
         />
         <!-- Display the selected slider value in real-time -->
         <output>25</output>
+
         <br><br>
+
+        <label for="user_url">Enter the Title of the Bingo Board:</label><br>
+        <input type="text" id="title" name="title" /><br><br>
+
 
         <!-- Submit Button -->
         <button type="submit">Submit</button>

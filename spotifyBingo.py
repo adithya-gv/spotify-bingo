@@ -75,7 +75,7 @@ def generate_bingo_board(songs):
     return [bingo_board[i*5:(i+1)*5] for i in range(5)]
 
 # Create and save the bingo board as a PDF
-def create_bingo_pdf(bingo_board):
+def create_bingo_pdf(bingo_board, title):
     pdf_stream = io.BytesIO()
     c = canvas.Canvas(pdf_stream, pagesize=letter)
     width, height = letter
@@ -109,7 +109,7 @@ def create_bingo_pdf(bingo_board):
 
     # Add Bingo title
     c.setFont("Helvetica-Bold", 24)
-    c.drawCentredString(width / 2, height - margin / 2, "Spotify Bingo")
+    c.drawCentredString(width / 2, height - margin / 2, title)
 
     # Save PDF
     c.save()
@@ -117,7 +117,7 @@ def create_bingo_pdf(bingo_board):
     return pdf_stream
 
 # Main function to generate 30 bingo board PDFs
-def create_bingo_boards(count, url):
+def create_bingo_boards(count, url, title):
     info = get_playlist_tracks(url)
     if len(info) < 24:
         raise ValueError("The playlist must contain at least 24 songs to generate a bingo board.")
@@ -135,7 +135,7 @@ def create_bingo_boards(count, url):
     with zipfile.ZipFile(zip_stream, mode='w', compression=zipfile.ZIP_DEFLATED) as zf:
         for _ in range(count):
             bingo_board = generate_bingo_board(songs)
-            file = create_bingo_pdf(bingo_board)
+            file = create_bingo_pdf(bingo_board, title)
             zf.writestr(f"spotify_bingo_{_ + 1}.pdf", file.getvalue())
     
     zip_stream.seek(0)

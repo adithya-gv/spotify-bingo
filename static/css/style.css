@@ -1,0 +1,122 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+    gap: 20px;
+    background: linear-gradient(to bottom, #1db954, #191414);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Centering Content */
+form {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+/* Labels */
+label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Inputs and Slider */
+input[type="text"],
+input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+input[type="text"] {
+    background-color: #333;
+    color: #fff;
+}
+
+input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background: #1db954;
+    height: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #1db954;
+    cursor: pointer;
+}
+
+output {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #1db954;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: #1db954;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #14833b;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        padding: 15px 20px;
+    }
+
+    button[type="submit"] {
+        font-size: 0.9rem;
+    }
+}
