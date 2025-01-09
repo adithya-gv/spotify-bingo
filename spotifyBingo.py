@@ -74,7 +74,7 @@ def generate_bingo_board(songs, size, include_free):
     song_count = song_count - 1 if include_free else song_count
     selected_songs = random.sample(songs, song_count)
     if include_free:
-        bingo_board = selected_songs[:song_count / 2] + ['Free Space'] + selected_songs[song_count / 2:]
+        bingo_board = selected_songs[:song_count // 2] + ['Free Space'] + selected_songs[song_count // 2:]
     else:
         bingo_board = selected_songs
     return [bingo_board[i*size:(i+1)*size] for i in range(size)]
