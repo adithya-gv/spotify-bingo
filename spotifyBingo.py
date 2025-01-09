@@ -69,25 +69,30 @@ def get_track_page(playlist_id, token, page):
 
 
 # Generate a bingo board with 24 random songs and a free space in the center
-def generate_bingo_board(songs):
-    selected_songs = random.sample(songs, 24)
-    bingo_board = selected_songs[:12] + ['Free Space'] + selected_songs[12:]
-    return [bingo_board[i*5:(i+1)*5] for i in range(5)]
+def generate_bingo_board(songs, size, include_free):
+    song_count = size * size
+    song_count = song_count - 1 if include_free else song_count
+    selected_songs = random.sample(songs, song_count)
+    if include_free:
+        bingo_board = selected_songs[:song_count / 2] + ['Free Space'] + selected_songs[song_count / 2:]
+    else:
+        bingo_board = selected_songs
+    return [bingo_board[i*size:(i+1)*size] for i in range(size)]
 
 # Create and save the bingo board as a PDF
-def create_bingo_pdf(bingo_board, title):
+def create_bingo_pdf(bingo_board, title, size):
     pdf_stream = io.BytesIO()
     c = canvas.Canvas(pdf_stream, pagesize=letter)
     width, height = letter
 
     # Set up constants for layout
     margin = 50
-    cell_size = (width - 2 * margin) / 5
+    cell_size = (width - 2 * margin) / size
     x_offset, y_offset = margin, height - margin - cell_size
     
     # Draw the bingo board grid and fill in songs
-    for i in range(5):
-        for j in range(5):
+    for i in range(size):
+        for j in range(size):
             x = x_offset + j * cell_size
             y = y_offset - i * cell_size
             
@@ -117,7 +122,7 @@ def create_bingo_pdf(bingo_board, title):
     return pdf_stream
 
 # Main function to generate 30 bingo board PDFs
-def create_bingo_boards(count, url, title):
+def create_bingo_boards(count, url, title, size, include_free):
     info = get_playlist_tracks(url)
     if len(info) < 24:
         raise ValueError("The playlist must contain at least 24 songs to generate a bingo board.")
@@ -125,8 +130,8 @@ def create_bingo_boards(count, url, title):
     # Merge (song, artist) into a single string
     songs = [f"{song} - {artist}" for song, artist in info]
 
-    # Truncate each to 75 characters
-    songs = [song[:75] for song in songs]
+    # Truncate each to 65 characters
+    songs = [song[:65] for song in songs]
     
     files = []
 
@@ -134,8 +139,8 @@ def create_bingo_boards(count, url, title):
 
     with zipfile.ZipFile(zip_stream, mode='w', compression=zipfile.ZIP_DEFLATED) as zf:
         for _ in range(count):
-            bingo_board = generate_bingo_board(songs)
-            file = create_bingo_pdf(bingo_board, title)
+            bingo_board = generate_bingo_board(songs, size, include_free)
+            file = create_bingo_pdf(bingo_board, title, size)
             zf.writestr(f"spotify_bingo_{_ + 1}.pdf", file.getvalue())
     
     zip_stream.seek(0)

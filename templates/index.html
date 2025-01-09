@@ -29,6 +29,20 @@
 
         <br><br>
 
+        <label for="include_free">
+            <input type="checkbox" id="include_free" name="include_free" />
+            Include Free Space
+        </label>
+        <br><br>
+    
+        <!-- Multiple Choice Query -->
+        <label for="board_size">Select the Size of the Bingo Board:</label><br>
+        <select id="board_size" name="board_size" required>
+            <option value="4">4x4</option>
+            <option value="5">5x5</option>
+        </select>
+        <br><br>
+
         <label for="user_url">Enter the Title of the Bingo Board:</label><br>
         <input type="text" id="title" name="title" /><br><br>
 
@@ -36,5 +50,8 @@
         <!-- Submit Button -->
         <button type="submit">Submit</button>
     </form>
+    <a href="https://adithya-gv.github.io/" target="_blank" style="position: absolute; bottom: 0; right: 0; margin: 10px; font-size: 12px; text-decoration: none; color: #007bff;">
+        Created by Adithya Vasudev
+    </a>
 </body>
 </html>
